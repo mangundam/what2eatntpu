@@ -18,6 +18,7 @@
 ### 按下Commit new file ![image](https://user-images.githubusercontent.com/31913840/137076409-c46aec73-ce22-4867-8dd7-1c7fbec835ed.png)
 ### 打開剛剛創建的文件![image](https://user-images.githubusercontent.com/31913840/137076454-1d128237-33d8-43d2-9fad-4f14d83a83e2.png)
 ### 複製網頁網址 ![image](https://user-images.githubusercontent.com/31913840/137076510-15f8d457-91ba-4278-b486-e513849302f5.png)
-### 傳送訊息: 自訂+網址(有無空白皆可) 範例:自訂https://github.com/mangundam/what2eatntpu/blob/main/example
+### 傳送訊息: 自訂+網址(有無空白皆可) 
+### 範例:自訂https://github.com/mangundam/what2eatntpu/blob/main/example
 ![image](https://user-images.githubusercontent.com/31913840/137076890-7186fc41-b05f-4309-9ba4-a2607600ba3f.png)
 ### 接著會從輸入的檔案內隨機抽出一個選項
