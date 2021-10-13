@@ -4,4 +4,4 @@
 
 ## 可用指令: 早餐、午餐、晚餐、早餐清單、午餐清單、晚餐清單、自訂、幫助、?
 
-## 輸入餐廳名稱會回傳菜單(若有登錄)，可以查看https://github.com/mangundam/what2eatntpu/tree/main/Menu確認
+## 輸入餐廳名稱會回傳菜單(若有登錄)，可以查看https://github.com/mangundam/what2eatntpu/tree/main/Menu 確認
