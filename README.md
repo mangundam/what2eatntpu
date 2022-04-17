@@ -9,6 +9,8 @@
 
 ### 輸入以上之外的訊息會回傳LINE按鈕，可以在手機上使用
 
+### 有任何問題或想新增功能可以聯絡我(mangundam1115@gmail.com)，或放在Issues內
+
 ## 自訂使用方法
 ### 建立一個github帳號，開一個repository(要public)
 ### 在repository裡新增文件
