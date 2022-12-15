@@ -118,9 +118,7 @@ async function rotat(name) {
   }
   
 }
-function startSpin(){
-Spinning = true;
-}
+
 function stopSpin(name){
 count = 0;
 const rectangle = document.getElementsByClassName(name) 
@@ -128,6 +126,11 @@ for(var j=0;j<rectangle.length;j++){
 		rectangle[j].style.transform = "rotate(0deg)";
 	  }
 }
+
+fetch('dinner')
+  .then(response => response.text())
+  .then(text => console.log(text))
+
 </script>
 
 <div class="main">
