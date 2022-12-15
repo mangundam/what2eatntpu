@@ -1,107 +1,157 @@
-<!DOCTYPE html>
-<html lang="en-us">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <title>Unity WebGL Player | Random_Dinner</title>
-    <link rel="shortcut icon" href="TemplateData/favicon.ico">
-    <link rel="stylesheet" href="TemplateData/style.css">
-  </head>
-  <body>
-    <div id="unity-container" class="unity-desktop">
-      <canvas id="unity-canvas" width=960 height=540></canvas>
-      <div id="unity-loading-bar">
-        <div id="unity-logo"></div>
-        <div id="unity-progress-bar-empty">
-          <div id="unity-progress-bar-full"></div>
-        </div>
-      </div>
-      <div id="unity-warning"> </div>
-      <div id="unity-footer">
-        <div id="unity-webgl-logo"></div>
-        <div id="unity-fullscreen-button"></div>
-        <div id="unity-build-title">Random_Dinner</div>
-      </div>
-    </div>
-    <script>
-      var container = document.querySelector("#unity-container");
-      var canvas = document.querySelector("#unity-canvas");
-      var loadingBar = document.querySelector("#unity-loading-bar");
-      var progressBarFull = document.querySelector("#unity-progress-bar-full");
-      var fullscreenButton = document.querySelector("#unity-fullscreen-button");
-      var warningBanner = document.querySelector("#unity-warning");
+<html>
+<head>
+<style>
+.main{
+width:500px;
+height:700px;
+border: 5px solid red;
+}
+.line{
+padding: 148.5px 0px 0px 0px;
+width:150px;
+margin:0px 0px 0px 0px;
+border-bottom: 3px solid red;
+position:absolute;
+}
+.lineBox{
+width:300px;
+height:300px;
+position:absolute;
+//margin:-5px 0px 0px -5px;
+//border:5px solid red;
+}
 
-      // Shows a temporary message banner/ribbon for a few seconds, or
-      // a permanent error message on top of the canvas if type=='error'.
-      // If type=='warning', a yellow highlight color is used.
-      // Modify or remove this function to customize the visually presented
-      // way that non-critical warnings and error messages are presented to the
-      // user.
-      function unityShowBanner(msg, type) {
-        function updateBannerVisibility() {
-          warningBanner.style.display = warningBanner.children.length ? 'block' : 'none';
-        }
-        var div = document.createElement('div');
-        div.innerHTML = msg;
-        warningBanner.appendChild(div);
-        if (type == 'error') div.style = 'background: red; padding: 10px;';
-        else {
-          if (type == 'warning') div.style = 'background: yellow; padding: 10px;';
-          setTimeout(function() {
-            warningBanner.removeChild(div);
-            updateBannerVisibility();
-          }, 5000);
-        }
-        updateBannerVisibility();
-      }
 
-      var buildUrl = "Build";
-      var loaderUrl = buildUrl + "/Build.loader.js";
-      var config = {
-        dataUrl: buildUrl + "/Build.data",
-        frameworkUrl: buildUrl + "/Build.framework.js",
-        codeUrl: buildUrl + "/Build.wasm",
-        streamingAssetsUrl: "StreamingAssets",
-        companyName: "DefaultCompany",
-        productName: "Random_Dinner",
-        productVersion: "0.1",
-        showBanner: unityShowBanner,
-      };
+.triangle-down {
 
-      // By default Unity keeps WebGL canvas render target size matched with
-      // the DOM size of the canvas element (scaled by window.devicePixelRatio)
-      // Set this to false if you want to decouple this synchronization from
-      // happening inside the engine, and you would instead like to size up
-      // the canvas DOM size and WebGL render target sizes yourself.
-      // config.matchWebGLToCanvasSize = false;
+	width: 0;
+	height: 0;
+	border-left: 10px solid transparent;
+	border-right: 10px solid transparent;
+	border-top: 20px solid #555;
+	position:absolute;
+	margin:-10px 140px 140px 140px;
+}
+.square{
+  height: 50;
+  width: 50;
+  background-color: #555;
+  border:5px #ff0000 solid;
+  position:absolute;
+  align: center;
+}
 
-      if (/iPhone|iPad|iPod|Android/i.test(navigator.userAgent)) {
-        container.className = "unity-mobile";
-        // Avoid draining fillrate performance on mobile devices,
-        // and default/override low DPI mode on mobile browsers.
-        config.devicePixelRatio = 1;
-        unityShowBanner('WebGL builds are not supported on mobile devices.');
-      } else {
-        canvas.style.width = "960px";
-        canvas.style.height = "540px";
-      }
-      loadingBar.style.display = "block";
+.rotate{
 
-      var script = document.createElement("script");
-      script.src = loaderUrl;
-      script.onload = () => {
-        createUnityInstance(canvas, config, (progress) => {
-          progressBarFull.style.width = 100 * progress + "%";
-        }).then((unityInstance) => {
-          loadingBar.style.display = "none";
-          fullscreenButton.onclick = () => {
-            unityInstance.SetFullscreen(1);
-          };
-        }).catch((message) => {
-          alert(message);
-        });
-      };
-      document.body.appendChild(script);
-    </script>
-  </body>
+	border:5px #70EE70 solid;
+	height: 300px;
+  width: 300px;
+  background-color: #FFF;
+  border-radius: 50%;
+  align: center;
+margin:250px auto;
+  //animation: rotation 3s infinite linear;
+}
+
+@keyframes rotation {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+.Choice{
+
+position:absolute;
+bottom:5px;
+right:50px;
+transform: rotate(180deg);
+}
+.centerCircle{
+	
+	border:5px #70EE70 solid;
+	height: 10px;
+  width: 10px;
+  background-color: #70EE70;
+  border-radius: 50%;
+position:absolute;
+
+margin:140px;
+}
+</style></head>
+<body>
+<script>
+var count=0;
+var Spinning = false;
+function delay(n){
+    return new Promise(function(resolve){
+        setTimeout(resolve,n*1000);
+    });
+}
+async function rotat(name) {
+	const angles = [];
+  if (Spinning == false){
+    Spinning = true;
+  }
+  else{
+     Spinning = false;
+  }
+  const rectangle = document.getElementsByClassName(name) 
+  angle = 360/rectangle.length
+  for (var i=0;i<rectangle.length;i++){
+  angles[i] = i*angle
+  }
+  while(Spinning){
+	
+    count++;
+	//console.log(count)
+	  
+	  for(var j=0;j<rectangle.length;j++){
+		//console.log(rectangle[j])
+		var deg = count +(angle*j);
+		rectangle[j].style.transform = "rotate(" + deg + "deg)";
+
+	  }
+	  //rectangle.style.animation = "rotation 3s infinite linear";
+	  await delay(0.001);
+  }
+  
+}
+function startSpin(){
+Spinning = true;
+}
+function stopSpin(name){
+count = 0;
+const rectangle = document.getElementsByClassName(name) 
+for(var j=0;j<rectangle.length;j++){
+		rectangle[j].style.transform = "rotate(0deg)";
+	  }
+}
+</script>
+
+<div class="main">
+
+<div class="rotate">
+
+<div class="lineBox"><div class="line"><div class="Choice">123</div></div></div>
+<div class="lineBox"><div class="line"><div class="Choice">123</div></div></div>
+<div class="lineBox"><div class="line"><div class="Choice">123</div></div></div>
+<div class="lineBox"><div class="line"><div class="Choice">123</div></div></div>
+<div class="lineBox"><div class="line"><div class="Choice">123</div></div></div>
+<div class="lineBox"><div class="line"><div class="Choice">123</div></div></div>
+<div class="lineBox"><div class="line"><div class="Choice">123</div></div></div>
+<div class="centerCircle"></div>
+<div class="triangle-down "></div>
+<button style="position:absolute;top:50px;" onclick="rotat('lineBox');">Start</button>
+
+<button style="position:absolute;top:100px;" onclick="stopSpin('lineBox');">Stop</button>
+<!--<div class="square">
+
+</div>-->
+
+
+
+</div>
+</body>
 </html>
