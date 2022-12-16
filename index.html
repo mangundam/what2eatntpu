@@ -73,6 +73,9 @@ body {
 	font-weight: bold; 
 	margin:auto 10px;
 }
+.btn:hover {
+  background-color:#A0A0A0;
+}
 .Strbtn{
 	height:120px;
 	font-weight: bold; 
@@ -144,11 +147,13 @@ async function rotat(name) {
     Spinning = true;
 	const btnText = document.getElementById("mainBtn");
 	btnText.textContent = "Pause";
+	btnText.style.backgroundColor = "#FF8888"
   }
   else{
 	Spinning = false;
 	const btnText = document.getElementById("mainBtn");
 	btnText.textContent = "Start";
+	btnText.style.backgroundColor = "#88FF88"
   }
   const rectangle = document.getElementsByClassName(name) 
   angle = 360/rectangle.length
@@ -233,7 +238,7 @@ function add_Line(number){
 }
 
 
-
+readList('breakfast');
 </script>
 
 <div class="main">
@@ -257,6 +262,6 @@ function add_Line(number){
 <div class="triangle-down "></div>
 
 </div>
-<div>version 2.3</div>
+<div>version 2.4</div>
 </body>
 </html>
