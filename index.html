@@ -3,28 +3,26 @@
 <meta charset="utf-8">
 <style>
 .main{
-width:500px;
-height:700px;
-border: 5px solid red;
+	width:500px;
+	height:700px;
+	border: 5px solid red;
 }
 .line{
-padding: 148.5px 0px 0px 0px;
-width:150px;
-margin:0px 0px 0px 0px;
-border-bottom: 3px solid red;
-position:absolute;
+	padding: 148.5px 0px 0px 0px;
+	width:150px;
+	margin:0px 0px 0px 0px;
+	border-bottom: 3px solid red;
+	position:absolute;
 }
 .lineBox{
-width:300px;
-height:300px;
-position:absolute;
-//margin:-5px 0px 0px -5px;
-//border:5px solid red;
+	width:300px;
+	height:300px;
+	position:absolute;
+
 }
 
 
 .triangle-down {
-
 	width: 0;
 	height: 0;
 	border-left: 10px solid transparent;
@@ -35,51 +33,39 @@ position:absolute;
 	border-top-color:#50FA50;
 }
 .square{
-  height: 50;
-  width: 50;
-  background-color: #555;
-  border:5px #ff0000 solid;
-  position:absolute;
-  align: center;
+	height: 50;
+	width: 50;
+	background-color: #555;
+	border:5px #ff0000 solid;
+	position:absolute;
+	align: center;
 }
 
 .rotate{
-
 	border:5px #70EE70 solid;
 	height: 300px;
-  width: 300px;
-  background-color: #FFF;
-  border-radius: 50%;
-  align: center;
-margin:250px auto;
-  //animation: rotation 3s infinite linear;
+	width: 300px;
+	background-color: #FFF;
+	border-radius: 50%;
+	align: center;
+	margin:250px auto;
 }
 
-@keyframes rotation {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
+
 .Choice{
-
-position:absolute;
-bottom:5px;
-right:50px;
-transform: rotate(180deg);
+	position:absolute;
+	bottom:-2px;
+	right:50px;
+	transform: rotate(180deg);
 }
 .centerCircle{
-	
 	border:5px #70EE70 solid;
 	height: 10px;
-  width: 10px;
-  background-color: #70EE70;
-  border-radius: 50%;
-position:absolute;
-
-margin:140px;
+	width: 10px;
+	background-color: #70EE70;
+	border-radius: 50%;
+	position:absolute;
+	margin:140px;
 }
 </style></head>
 <body>
@@ -130,13 +116,18 @@ for(var j=0;j<rectangle.length;j++){
 }
 
 var list;
-function readList(filename,name){
+function readList(filename){
 fetch(filename)
     .then(function(response) {return response.text()})
     .then(function(html) {
+		
 		list = html
 		list = list.split("\n");
-		const Choice_text = document.getElementsByClassName(name)
+		
+		delete_Line()
+		add_Line(Object.keys(list).length-1)
+		
+		const Choice_text = document.getElementsByClassName('Choice')
 		const rectangle = document.getElementsByClassName('lineBox')
 		angle = 360/rectangle.length
 		for(var j=0;j<Choice_text.length;j++){
@@ -150,10 +141,30 @@ fetch(filename)
         console.log('Failed to fetch page: ', err);  
     });
 }
+function delete_Line(){
+	const LineBox = document.getElementsByClassName("lineBox");
+	while(LineBox.length > 0){
+        LineBox[0].parentNode.removeChild(LineBox[0]);
+    }
+
+}
 
 
+function add_Line(number){
+	for(var i=0;i<number;i++){
+		var lineBox = document.createElement("div");
+		lineBox.classList.add("lineBox");
+		var line = document.createElement("div");
+		line.classList.add("line");
+		var choice = document.createElement("div");
+		choice.classList.add("Choice");
+		line.appendChild(choice);
+		lineBox.appendChild(line);
+		document.getElementById("empty").appendChild(lineBox);
 
+	}
 
+}
 
 
 
@@ -161,15 +172,11 @@ fetch(filename)
 
 <div class="main">
 
-<div class="rotate">
+<div class="rotate" id="circle">
+<div id="empty">
+<div class="lineBox"><div class="line"><div class="Choice">初始</div></div></div>
 
-<div class="lineBox"><div class="line"><div class="Choice">老士林</div></div></div>
-<div class="lineBox"><div class="line"><div class="Choice">123</div></div></div>
-<div class="lineBox"><div class="line"><div class="Choice">123</div></div></div>
-<div class="lineBox"><div class="line"><div class="Choice">123</div></div></div>
-<div class="lineBox"><div class="line"><div class="Choice">123</div></div></div>
-<div class="lineBox"><div class="line"><div class="Choice">123</div></div></div>
-<div class="lineBox"><div class="line"><div class="Choice">123</div></div></div>
+</div>
 <div class="centerCircle"></div>
 <div class="triangle-down "></div>
 
@@ -178,12 +185,14 @@ fetch(filename)
 
 <button style="position:absolute;left:100px;top:100px;" onclick="stopSpin('lineBox');">Stop</button>
 
-<button style="position:absolute;left:200px;top:50;" onclick="readList('breakfast','Choice');">Breakfast</button>
+<button style="position:absolute;left:200px;top:50;" onclick="readList('breakfast');">Breakfast</button>
 
-<button style="position:absolute;left:200px;top:100px;" onclick="readList('lunch','Choice');">Lunch</button>
+<button style="position:absolute;left:200px;top:100px;" onclick="readList('lunch');">Lunch</button>
 
-<button style="position:absolute;left:200px;top:150px;" onclick="readList('dinner','Choice');">Dinner</button>
+<button style="position:absolute;left:200px;top:150px;" onclick="readList('dinner');">Dinner</button>
 
+<button style="position:absolute;left:300px;top:50px;" onclick="test();">test</button>
+<button style="position:absolute;left:300px;top:100px;" onclick="delete_Line();">delete_Line</button>
 
 
 <!--<div class="square">
@@ -193,5 +202,6 @@ fetch(filename)
 
 
 </div>
+<div>version 1.2</div>
 </body>
 </html>
