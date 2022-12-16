@@ -2,6 +2,12 @@
 <head>
 <meta charset="utf-8">
 <style>
+html { background-color: #000; } 
+body {
+    min-height: 100vh;
+    max-width: 400px;
+    margin: 0 auto;
+}
 .main{
 	width:540px;
 	height:960px;
@@ -60,9 +66,9 @@
 	margin:235px;
 }
 .btn{
-width:80px;
-height:40px;
-
+width:100px;
+height:60px;
+font-size:20px;
 }
 </style></head>
 <body>
@@ -172,6 +178,12 @@ function add_Line(number){
 </script>
 
 <div class="main">
+<button id="mainBtn" class="btn" style="left:100px;top:150px;" onclick="rotat('lineBox');">Start</button>
+
+<button class="btn" style="left:200px;top:50;" onclick="readList('breakfast');">Breakfast</button>
+<button class="btn" style="left:200px;top:100px;" onclick="readList('lunch');">Lunch</button>
+<button class="btn" style="left:200px;top:150px;" onclick="readList('dinner');">Dinner</button>
+
 
 <div class="Cricle">
 <div id="empty">
@@ -182,11 +194,6 @@ function add_Line(number){
 <div class="triangle-down "></div>
 
 
-<button id="mainBtn" class="btn" style="position:absolute;left:100px;top:50px;" onclick="rotat('lineBox');">Start</button>
-
-<button class="btn" style="position:absolute;left:200px;top:50;" onclick="readList('breakfast');">Breakfast</button>
-<button class="btn" style="position:absolute;left:200px;top:100px;" onclick="readList('lunch');">Lunch</button>
-<button class="btn" style="position:absolute;left:200px;top:150px;" onclick="readList('dinner');">Dinner</button>
 
 
 <!--<div class="square">
@@ -196,6 +203,6 @@ function add_Line(number){
 
 
 </div>
-<div>version 1.6</div>
+<div>version 1.7</div>
 </body>
 </html>
