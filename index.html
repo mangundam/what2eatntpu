@@ -3,48 +3,40 @@
 <meta charset="utf-8">
 <style>
 .main{
-	width:500px;
-	height:700px;
+	width:540px;
+	height:960px;
 	border: 5px solid red;
 }
 .line{
-	padding: 148.5px 0px 0px 0px;
-	width:150px;
+	padding: 248.5px 0px 0px 0px;
+	width:250px;
 	margin:0px 0px 0px 0px;
 	border-bottom: 3px solid red;
 	position:absolute;
 }
 .lineBox{
-	width:300px;
-	height:300px;
+	width:500px;
+	height:500px;
 	position:absolute;
 
 }
-
 
 .triangle-down {
 	width: 0;
 	height: 0;
-	border-left: 10px solid transparent;
-	border-right: 10px solid transparent;
-	border-top: 20px solid #555;
+	border-left: 20px solid transparent;
+	border-right: 20px solid transparent;
+	border-top: 40px solid #555;
 	position:absolute;
-	margin:-10px 140px 140px 140px;
+	margin:-10px 230px 230px 230px;
 	border-top-color:#50FA50;
 }
-.square{
-	height: 50;
-	width: 50;
-	background-color: #555;
-	border:5px #ff0000 solid;
-	position:absolute;
-	align: center;
-}
 
-.rotate{
+
+.Cricle{
 	border:5px #70EE70 solid;
-	height: 300px;
-	width: 300px;
+	height: 500px;
+	width: 500px;
 	background-color: #FFF;
 	border-radius: 50%;
 	align: center;
@@ -52,20 +44,20 @@
 }
 
 
-.Choice{
+.Choice_text{
 	position:absolute;
 	bottom:-2px;
-	right:50px;
+	right:70px;
 	transform: rotate(180deg);
 }
 .centerCircle{
 	border:5px #70EE70 solid;
-	height: 10px;
-	width: 10px;
+	height: 20px;
+	width: 20px;
 	background-color: #70EE70;
 	border-radius: 50%;
 	position:absolute;
-	margin:140px;
+	margin:235px;
 }
 .btn{
 width:80px;
@@ -136,7 +128,7 @@ fetch(filename)
 		delete_Line()
 		add_Line(Object.keys(list).length-1)
 		
-		const Choice_text = document.getElementsByClassName('Choice')
+		const Choice_text = document.getElementsByClassName('Choice_text')
 		const rectangle = document.getElementsByClassName('lineBox')
 		angle = 360/rectangle.length
 		for(var j=0;j<Choice_text.length;j++){
@@ -166,7 +158,7 @@ function add_Line(number){
 		var line = document.createElement("div");
 		line.classList.add("line");
 		var choice = document.createElement("div");
-		choice.classList.add("Choice");
+		choice.classList.add("Choice_text");
 		line.appendChild(choice);
 		lineBox.appendChild(line);
 		document.getElementById("empty").appendChild(lineBox);
@@ -181,9 +173,9 @@ function add_Line(number){
 
 <div class="main">
 
-<div class="rotate" id="circle">
+<div class="Cricle">
 <div id="empty">
-<div class="lineBox"><div class="line"><div class="Choice">初始</div></div></div>
+<div class="lineBox"><div class="line"><div class="Choice_text">初始</div></div></div>
 
 </div>
 <div class="centerCircle"></div>
@@ -204,6 +196,6 @@ function add_Line(number){
 
 
 </div>
-<div>version 1.5</div>
+<div>version 1.6</div>
 </body>
 </html>
