@@ -70,11 +70,16 @@ width:100px;
 height:60px;
 font-size:20px;
 }
+.slider{
+width:500px;
+height: 50px;
+}
 </style></head>
 <body>
 <script>
 var count=0;
 var Spinning = false;
+var SpinSpeed = 1;
 function delay(n){
     return new Promise(function(resolve){
         setTimeout(resolve,n*1000);
@@ -88,23 +93,25 @@ async function rotat(name) {
 	btnText.textContent = "Pause";
   }
   else{
-     Spinning = false;
-	 const btnText = document.getElementById("mainBtn");
+	Spinning = false;
+	const btnText = document.getElementById("mainBtn");
 	btnText.textContent = "Start";
   }
   const rectangle = document.getElementsByClassName(name) 
   angle = 360/rectangle.length
   for (var i=0;i<rectangle.length;i++){
-  angles[i] = i*angle
+	angles[i] = i*angle
   }
   while(Spinning){
 	
     count++;
 	//console.log(count)
-	  
+	 
 	  for(var j=0;j<rectangle.length;j++){
-		//console.log(rectangle[j])
-		var deg = count +(angle*j);
+		//console.log(rectangle[j]) 
+		var SpinSpeed = document.getElementById("Speed").value/100+1;
+		var deg = (SpinSpeed*count +(angle*j));
+		//console.log(SpinSpeed)
 		rectangle[j].style.transform = "rotate(" + deg + "deg)";
 
 	  }
@@ -123,6 +130,7 @@ for(var j=0;j<rectangle.length;j++){
 }
 
 var list;
+
 function readList(filename){
 fetch(filename)
     .then(function(response) {return response.text()})
@@ -183,6 +191,7 @@ function add_Line(number){
 <button class="btn" style="left:200px;top:50;" onclick="readList('breakfast');">Breakfast</button>
 <button class="btn" style="left:200px;top:100px;" onclick="readList('lunch');">Lunch</button>
 <button class="btn" style="left:200px;top:150px;" onclick="readList('dinner');">Dinner</button>
+<input type="range" min="-200" max="200" value="0" class="slider" id="Speed">
 
 
 <div class="Cricle">
@@ -203,6 +212,6 @@ function add_Line(number){
 
 
 </div>
-<div>version 1.7</div>
+<div>version 1.8</div>
 </body>
 </html>
