@@ -67,6 +67,11 @@
 	position:absolute;
 	margin:140px;
 }
+.btn{
+width:80px;
+height:40px;
+
+}
 </style></head>
 <body>
 <script>
@@ -81,9 +86,13 @@ async function rotat(name) {
 	const angles = [];
   if (Spinning == false){
     Spinning = true;
+	const btnText = document.getElementById("mainBtn");
+	btnText.textContent = "Pause";
   }
   else{
      Spinning = false;
+	 const btnText = document.getElementById("mainBtn");
+	btnText.textContent = "Start";
   }
   const rectangle = document.getElementsByClassName(name) 
   angle = 360/rectangle.length
@@ -181,13 +190,11 @@ function add_Line(number){
 <div class="triangle-down "></div>
 
 
-<button style="position:absolute;left:100px;top:50px;" onclick="rotat('lineBox');">Start</button>
+<button id="mainBtn" class="btn" style="position:absolute;left:100px;top:50px;" onclick="rotat('lineBox');">Start</button>
 
-<button style="position:absolute;left:100px;top:100px;" onclick="stopSpin('lineBox');">Stop</button>
-
-<button style="position:absolute;left:200px;top:50;" onclick="readList('breakfast');">Breakfast</button>
-<button style="position:absolute;left:200px;top:100px;" onclick="readList('lunch');">Lunch</button>
-<button style="position:absolute;left:200px;top:150px;" onclick="readList('dinner');">Dinner</button>
+<button class="btn" style="position:absolute;left:200px;top:50;" onclick="readList('breakfast');">Breakfast</button>
+<button class="btn" style="position:absolute;left:200px;top:100px;" onclick="readList('lunch');">Lunch</button>
+<button class="btn" style="position:absolute;left:200px;top:150px;" onclick="readList('dinner');">Dinner</button>
 
 
 <!--<div class="square">
@@ -197,6 +204,6 @@ function add_Line(number){
 
 
 </div>
-<div>version 1.4</div>
+<div>version 1.5</div>
 </body>
 </html>
