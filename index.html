@@ -78,24 +78,30 @@ body {
 }
 #result{
 	margin:150px auto -150px auto;
-	font-size:120px;
-	width:300px;
+	font-size:100px;
+	width:900px;
 	height: 120px;
-	border: 5px solid red;
+	//border: 5px solid red;
 	text-align:center;
 }
+
 </style></head>
 <body>
 <script>
 var count=0;
 var Spinning = false;
 var SpinSpeed = 1;
+var list;
+var last_one = "";
+var base_ang = 90;
+var reverse_list;
 function delay(n){
     return new Promise(function(resolve){
         setTimeout(resolve,n*1000);
     });
 }
 async function rotat(name) {
+
 	const angles = [];
   if (Spinning == false){
     Spinning = true;
@@ -109,22 +115,17 @@ async function rotat(name) {
   }
   const rectangle = document.getElementsByClassName(name) 
   angle = 360/rectangle.length
-  for (var i=0;i<rectangle.length;i++){
-	angles[i] = i*angle
-  }
   while(Spinning){
-	
-    count++;
-	//console.log(count)
-	 
+    count++; 
 	  for(var j=0;j<rectangle.length;j++){
-		//console.log(rectangle[j]) 
 		var SpinSpeed = document.getElementById("Speed").value/100+1;
-		var deg = (SpinSpeed*count +(angle*j));
-		//console.log(SpinSpeed)
+		var deg = (SpinSpeed*count +(angle*j))+90;
 		rectangle[j].style.transform = "rotate(" + deg + "deg)";
-
 	  }
+		which = ((deg-90)/angle+1)%rectangle.length;
+		document.getElementById("result").textContent = reverse_list[Math.floor(which)];
+	  
+	  console.log(last_one)
 	  //rectangle.style.animation = "rotation 3s infinite linear";
 	  await delay(0.001);
   }
@@ -139,28 +140,33 @@ for(var j=0;j<rectangle.length;j++){
 	  }
 }
 
-var list;
+
 
 function readList(filename){
 fetch(filename)
     .then(function(response) {return response.text()})
     .then(function(html) {
 		
-		list = html
+		list = html;
 		list = list.split("\n");
+		list = list.filter(n => n)
+		reverse_list = Array.from(list);
+		reverse_list = reverse_list.reverse();
+		console.log(list)
+		console.log(reverse_list)
 		
-		delete_Line()
-		add_Line(Object.keys(list).length-1)
+		delete_Line();
+		add_Line(Object.keys(list).length);
 		
-		const Choice_text = document.getElementsByClassName('Choice_text')
-		const rectangle = document.getElementsByClassName('lineBox')
-		angle = 360/rectangle.length
+		const Choice_text = document.getElementsByClassName('Choice_text');
+		const rectangle = document.getElementsByClassName('lineBox');
+		angle = 360/rectangle.length;
 		for(var j=0;j<Choice_text.length;j++){
-				console.log(Choice_text[j].textContent);
+				//console.log(Choice_text[j].textContent);
 				Choice_text[j].textContent = list[j];
-				rectangle[j].style.transform = "rotate(" + angle*j + "deg)";
+				ini_angle = (angle*j)+90
+				rectangle[j].style.transform = "rotate(" + ini_angle + "deg)";
 			  }
-		console.log(list);
     })
     .catch(function(err) {  
         console.log('Failed to fetch page: ', err);  
@@ -186,9 +192,7 @@ function add_Line(number){
 		line.appendChild(choice);
 		lineBox.appendChild(line);
 		document.getElementById("empty").appendChild(lineBox);
-
 	}
-
 }
 
 
@@ -203,7 +207,7 @@ function add_Line(number){
 <button class="btn" style="left:200px;top:150px;" onclick="readList('dinner');">Dinner</button>
 <input type="range" min="-99" max="200" value="0" class="slider" id="Speed">
 
-<div id="result">123</div>
+<div id="result"></div>
 
 <div class="Cricle">
 <div id="empty">
@@ -213,16 +217,7 @@ function add_Line(number){
 <div class="centerCircle"></div>
 <div class="triangle-down "></div>
 
-
-
-
-<!--<div class="square">
-
-</div>-->
-
-
-
 </div>
-<div>version 2.0</div>
+<div>version 2.1</div>
 </body>
 </html>
