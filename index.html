@@ -62,7 +62,7 @@ body {
 	height: 30px;
 	width: 30px;
 	background-color: #70EE70;
-	
+	//border-radius: 50%;
 	position:absolute;
 	margin:430px;
 }
@@ -96,7 +96,7 @@ body {
 }
 .slider {
   -webkit-appearance: none;
-  width: 80%;
+  width: 100%;
   height: 55px;
   background: #d3d3d3;
   outline: none;
@@ -104,7 +104,7 @@ body {
   -webkit-transition: .2s;
   transition: opacity .2s;
   align:center;
-  margin:40px 50px -40px 50px;
+  margin:70px 0px -70px 0px;
 }
 
 .slider:hover {
@@ -114,15 +114,15 @@ body {
 .slider::-webkit-slider-thumb {//button
   -webkit-appearance: none;
   appearance: none;
-  width: 55px;
-  height: 55px;
+  width: 80px;
+  height: 80px;
   background: #04CC04;
   cursor: pointer;
 }
 
 .slider::-moz-range-thumb {
-  width: 55px;
-  height: 55px;
+  width: 80px;
+  height: 80px;
   background: #04AA6D;
   cursor: pointer;
 }
@@ -133,8 +133,6 @@ var count=0;
 var Spinning = false;
 var SpinSpeed = 1;
 var list;
-var last_one = "";
-var base_ang = 90;
 var reverse_list;
 function delay(n){
     return new Promise(function(resolve){
@@ -167,36 +165,19 @@ async function rotat(name) {
 	  }
 		which = ((deg-90)/angle+1)%rectangle.length;
 		document.getElementById("result").textContent = reverse_list[Math.floor(which)];
-	  
-	  console.log(last_one)
-	  //rectangle.style.animation = "rotation 3s infinite linear";
-	  await delay(0.001);
+	  	await delay(0.001);
   }
   
 }
-
-function stopSpin(name){
-count = 0;
-const rectangle = document.getElementsByClassName(name) 
-for(var j=0;j<rectangle.length;j++){
-		rectangle[j].style.transform = "rotate(0deg)";
-	  }
-}
-
-
-
 function readList(filename){
 fetch(filename)
     .then(function(response) {return response.text()})
     .then(function(html) {
-		
 		list = html;
 		list = list.split("\n");
 		list = list.filter(n => n)
 		reverse_list = Array.from(list);
 		reverse_list = reverse_list.reverse();
-		console.log(list)
-		console.log(reverse_list)
 		
 		delete_Line();
 		add_Line(Object.keys(list).length);
@@ -205,7 +186,6 @@ fetch(filename)
 		const rectangle = document.getElementsByClassName('lineBox');
 		angle = 360/rectangle.length;
 		for(var j=0;j<Choice_text.length;j++){
-				//console.log(Choice_text[j].textContent);
 				Choice_text[j].textContent = list[j];
 				ini_angle = (angle*j)+90
 				rectangle[j].style.transform = "rotate(" + ini_angle + "deg)";
@@ -263,6 +243,6 @@ readList('breakfast');
 <div class="triangle-down "></div>
 
 </div>
-<div>version 2.4</div>
+<div>version 2.5</div>
 </body>
 </html>
