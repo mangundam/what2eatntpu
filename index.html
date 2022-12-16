@@ -1,5 +1,6 @@
 <html>
 <head>
+<meta charset="utf-8">
 <style>
 .main{
 width:500px;
@@ -31,6 +32,7 @@ position:absolute;
 	border-top: 20px solid #555;
 	position:absolute;
 	margin:-10px 140px 140px 140px;
+	border-top-color:#50FA50;
 }
 .square{
   height: 50;
@@ -127,9 +129,33 @@ for(var j=0;j<rectangle.length;j++){
 	  }
 }
 
-fetch('dinner')
-  .then(response => response.text())
-  .then(text => console.log(text))
+var list;
+function readList(filename,name){
+fetch(filename)
+    .then(function(response) {return response.text()})
+    .then(function(html) {
+		list = html
+		list = list.split("\n");
+		const Choice_text = document.getElementsByClassName(name)
+		const rectangle = document.getElementsByClassName('lineBox')
+		angle = 360/rectangle.length
+		for(var j=0;j<Choice_text.length;j++){
+				console.log(Choice_text[j].textContent);
+				Choice_text[j].textContent = list[j];
+				rectangle[j].style.transform = "rotate(" + angle*j + "deg)";
+			  }
+		console.log(list);
+    })
+    .catch(function(err) {  
+        console.log('Failed to fetch page: ', err);  
+    });
+}
+
+
+
+
+
+
 
 </script>
 
@@ -137,7 +163,7 @@ fetch('dinner')
 
 <div class="rotate">
 
-<div class="lineBox"><div class="line"><div class="Choice">123</div></div></div>
+<div class="lineBox"><div class="line"><div class="Choice">老士林</div></div></div>
 <div class="lineBox"><div class="line"><div class="Choice">123</div></div></div>
 <div class="lineBox"><div class="line"><div class="Choice">123</div></div></div>
 <div class="lineBox"><div class="line"><div class="Choice">123</div></div></div>
@@ -146,9 +172,20 @@ fetch('dinner')
 <div class="lineBox"><div class="line"><div class="Choice">123</div></div></div>
 <div class="centerCircle"></div>
 <div class="triangle-down "></div>
-<button style="position:absolute;top:50px;" onclick="rotat('lineBox');">Start</button>
 
-<button style="position:absolute;top:100px;" onclick="stopSpin('lineBox');">Stop</button>
+
+<button style="position:absolute;left:100px;top:50px;" onclick="rotat('lineBox');">Start</button>
+
+<button style="position:absolute;left:100px;top:100px;" onclick="stopSpin('lineBox');">Stop</button>
+
+<button style="position:absolute;left:200px;top:50;" onclick="readList('Breakfast','Choice');">breakfast</button>
+
+<button style="position:absolute;left:200px;top:100px;" onclick="readList('Lunch','Choice');">lunch</button>
+
+<button style="position:absolute;left:200px;top:150px;" onclick="readList('dinner','Choice');">Dinner</button>
+
+
+
 <!--<div class="square">
 
 </div>-->
