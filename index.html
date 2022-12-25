@@ -10,8 +10,8 @@ body {
 .main{
 	width:1000px;
 	height:1700px;
-	//border: 5px solid red;
-	background-color:#8888EE;
+	border: 5px solid #00FF00;
+	background-color:#DEFFCA;
 }
 .line{
 	padding: 448.5px 0px 0px 0px;
@@ -69,13 +69,13 @@ body {
 }
 .timeStart{
 position:absolute;
-//border:5px #EEEE70 solid;
-	height: 90px;
-	width: 90px;
-	//background-color: #70EE70;
+	height: 120px;
+	width: 120px;
+	background-color: #F0F0F0;
 	border-radius: 50%;
-	margin:-30px 0px 0px -30px ;
-	
+	margin:-45px 0px 0px -45px ;
+	background-image: url('Image/start.png');
+	background-size: 100% 100%;
 
 }
 .timeStart:active {
@@ -88,12 +88,12 @@ position:absolute;
   
 }
 .btn{
-	width:200px;
-	height:200px;
+	width:230px;
+	height:230px;
 	font-size:40px;
 	font-weight: bold; 
 	margin:auto 10px;
-	margin:20px 10px 0px 10px;
+	margin:20px 8px 0px 8px;
 }
 .btn:hover {
   background-color:#E0E0E0;
@@ -130,16 +130,28 @@ position:absolute;
 .drink:active {
 	border: 6px #000000 solid;
 }
+.breakfast:hover {
+	border: 6px #000000 solid;
+}
+.lunch:hover {
+	border: 6px #000000 solid;
+}
+.dinner:hover {
+	border: 6px #000000 solid;
+}
+.drink:hover {
+	border: 6px #000000 solid;
+}
 .Strbtn{
 	height:120px;
 	font-weight: bold; 
 	width:80%;
-	margin:20px 50px 0px 50px;
+	margin:20px 90px 0px 90px;
 	font-size:80px;
 	background-color: #88FF88;
 }
 .Strbtn:hover {
-  background-color:#E0E0E0;
+  background-color:#E0FFE0;
 }
 
 #result{
@@ -331,7 +343,7 @@ readList('breakfast');
 <button class="btn dinner" onclick="readList('dinner');">Dinner</button>
 <button class="btn drink" onclick="readList('drink');">Drink</button>
 
-<button id="mainBtn" class="Strbtn" onclick="rotat('lineBox');">Start</button>
+<button id="mainBtn" class="Strbtn" onclick="rotat('lineBox');">SPIN</button>
 <input type="range" min="-99" max="200" value="0" class="slider" id="Speed">
 
 <div id="result"></div>
@@ -345,6 +357,6 @@ readList('breakfast');
 <div class="triangle-down "></div>
 
 </div>
-<div>version 2.6</div>
+<div>version 2.7</div>
 </body>
 </html>
