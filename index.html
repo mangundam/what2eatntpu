@@ -75,7 +75,7 @@ position:absolute;
 	//background-color: #70EE70;
 	border-radius: 50%;
 	margin:-30px 0px 0px -30px ;
-	//background-image: url('img_girl.jpg');
+	
 
 }
 .timeStart:active {
@@ -88,8 +88,8 @@ position:absolute;
   
 }
 .btn{
-	width:30%;
-	height:120px;
+	width:200px;
+	height:200px;
 	font-size:40px;
 	font-weight: bold; 
 	margin:auto 10px;
@@ -99,13 +99,36 @@ position:absolute;
   background-color:#E0E0E0;
 }
 .breakfast{
-background-color:#FCE070;
+	background-color:#FCE070;
+	background-image: url('Image/morning.png');
+	background-size: 100% 100%;
 }
 .lunch{
-background-color:#EC9040;
+	background-color:#EC9040;
+	background-image: url('Image/lunch.png');
+	background-size: 100% 100%;
 }
 .dinner{
-background-color:#7C70A0;
+	background-color:#7C70A0;
+	background-image: url('Image/dinner.png');
+	background-size: 100% 100%;
+}
+.drink{
+	background-color:#7C70A0;
+	background-image: url('Image/drink.png');
+	background-size: 100% 100%;
+}
+.breakfast:active {
+	border: 6px #000000 solid;
+}
+.lunch:active {
+	border: 6px #000000 solid;
+}
+.dinner:active {
+	border: 6px #000000 solid;
+}
+.drink:active {
+	border: 6px #000000 solid;
 }
 .Strbtn{
 	height:120px;
@@ -238,7 +261,7 @@ async function countDown() {
   }
   
 }
-
+//border: 6px #000000 solid;
 function readList(filename){
 fetch(filename)
     .then(function(response) {return response.text()})
@@ -251,6 +274,14 @@ fetch(filename)
 		
 		delete_Line();
 		add_Line(Object.keys(list).length);
+		//var btn_border = document.getElementsByClassName("btn");
+		//for(var i=0;i<btn_border.text;i++){
+			
+			//btn_border[i].style.border = "0px solid #000000";
+		//}
+		
+		//btn_border = document.getElementsByClassName(filename);
+		//btn_border[0].style.border = "6px solid #000000";
 		
 		const Choice_text = document.getElementsByClassName('Choice_text');
 		const rectangle = document.getElementsByClassName('lineBox');
@@ -298,6 +329,7 @@ readList('breakfast');
 <button class="btn breakfast" onclick="readList('breakfast');">Breakfast</button>
 <button class="btn lunch" onclick="readList('lunch');">Lunch</button>
 <button class="btn dinner" onclick="readList('dinner');">Dinner</button>
+<button class="btn drink" onclick="readList('drink');">Drink</button>
 
 <button id="mainBtn" class="Strbtn" onclick="rotat('lineBox');">Start</button>
 <input type="range" min="-99" max="200" value="0" class="slider" id="Speed">
