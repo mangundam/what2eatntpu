@@ -11,6 +11,7 @@ body {
 	width:1000px;
 	height:1700px;
 	//border: 5px solid red;
+	background-color:#8888EE;
 }
 .line{
 	padding: 448.5px 0px 0px 0px;
@@ -66,6 +67,26 @@ body {
 	position:absolute;
 	margin:430px;
 }
+.timeStart{
+position:absolute;
+//border:5px #EEEE70 solid;
+	height: 90px;
+	width: 90px;
+	//background-color: #70EE70;
+	border-radius: 50%;
+	margin:-30px 0px 0px -30px ;
+	//background-image: url('img_girl.jpg');
+
+}
+.timeStart:active {
+  background-color: #C0FeC0;
+  //box-shadow: 0 5px #666;
+  //transform: translateY(4px);
+}
+.timeStart:hover {
+  background-color: #E0FeE0;
+  
+}
 .btn{
 	width:30%;
 	height:120px;
@@ -75,7 +96,16 @@ body {
 	margin:20px 10px 0px 10px;
 }
 .btn:hover {
-  background-color:#A0A0A0;
+  background-color:#E0E0E0;
+}
+.breakfast{
+background-color:#FCE070;
+}
+.lunch{
+background-color:#EC9040;
+}
+.dinner{
+background-color:#7C70A0;
 }
 .Strbtn{
 	height:120px;
@@ -84,6 +114,9 @@ body {
 	margin:20px 50px 0px 50px;
 	font-size:80px;
 	background-color: #88FF88;
+}
+.Strbtn:hover {
+  background-color:#E0E0E0;
 }
 
 #result{
@@ -166,9 +199,46 @@ async function rotat(name) {
 		which = ((deg-90)/angle+1)%rectangle.length;
 		document.getElementById("result").textContent = reverse_list[Math.floor(which)];
 	  	await delay(0.001);
+		console.log(SpinSpeed)
   }
   
 }
+async function countDown() {
+
+	const angles = [];
+  if (Spinning == false){
+    Spinning = true;
+	var startUp_speed = 1 + Math.random() * 8;
+	SpinSpeed = startUp_speed;
+  }
+  count = 0;
+  const rectangle = document.getElementsByClassName('lineBox');
+  var angle = 360/rectangle.length;
+  while(Spinning){
+    count++;
+	for(var j=0;j<rectangle.length;j++){
+		var deg = (SpinSpeed*count +(angle*j))+90;
+		//if (deg>360){deg=deg%360;}
+		rectangle[j].style.transform = "rotate(" + deg + "deg)";
+	}
+	which = ((deg-90)/angle+1)%rectangle.length;
+	document.getElementById("result").textContent = reverse_list[Math.floor(which)];
+	SpinSpeed=SpinSpeed-0.01;
+	//console.log(SpinSpeed)
+	//console.log(count)
+	//console.log(angle)
+	//console.log(deg)
+	if (SpinSpeed<startUp_speed/2){
+		Spinning = false;
+		break;
+	}
+	await delay(0.001);
+	
+		
+  }
+  
+}
+
 function readList(filename){
 fetch(filename)
     .then(function(response) {return response.text()})
@@ -225,9 +295,9 @@ readList('breakfast');
 <div class="main">
 
 
-<button class="btn" style="background-color:#FCE070;" onclick="readList('breakfast');">Breakfast</button>
-<button class="btn" style="background-color:#EC9040;" onclick="readList('lunch');">Lunch</button>
-<button class="btn" style="background-color:#7C70A0;color:#FFF;" onclick="readList('dinner');">Dinner</button>
+<button class="btn breakfast" onclick="readList('breakfast');">Breakfast</button>
+<button class="btn lunch" onclick="readList('lunch');">Lunch</button>
+<button class="btn dinner" onclick="readList('dinner');">Dinner</button>
 
 <button id="mainBtn" class="Strbtn" onclick="rotat('lineBox');">Start</button>
 <input type="range" min="-99" max="200" value="0" class="slider" id="Speed">
@@ -239,7 +309,7 @@ readList('breakfast');
 <div class="lineBox"><div class="line"><div class="Choice_text">初始</div></div></div>
 
 </div>
-<div class="centerCircle"></div>
+<div class="centerCircle"><button class="timeStart" onclick="countDown()"></button></div>
 <div class="triangle-down "></div>
 
 </div>
