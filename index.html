@@ -269,7 +269,10 @@ async function countDown() {
 	const angles = [];
   if (Spinning == false){
     Spinning = true;
-	var startUp_speed = 1 + Math.random() * 8;
+	var SpinBar = document.getElementById("Speed").value/50+1;
+	var startUp_speed = (1 + Math.random() * 8)+SpinBar;
+	console.log(SpinBar)
+	console.log(startUp_speed)
 	SpinSpeed = startUp_speed;
   }
   count = 0;
@@ -383,6 +386,6 @@ readList('breakfast');
 <div class="triangle-down "></div>
 
 </div>
-<div>version 3.0</div>
+<div>version 3.1</div>
 </body>
 </html>
