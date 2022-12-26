@@ -3,9 +3,9 @@
 <meta charset="utf-8">
 <style>
 body {
-    min-height: 1800px;
-    max-width: 960px;
-    margin: 0 auto;
+	min-height: 1800px;
+	max-width: 960px;
+	margin: 0 auto;
 }
 .main{
 	width:1000px;
@@ -58,34 +58,34 @@ body {
 	font-size:30px;
 	font-weight: bold; 
 }
-.centerCircle{
-	border:5px #70EE70 solid;
-	height: 30px;
-	width: 30px;
-	background-color: #70EE70;
-	border-radius: 50%;
-	position:absolute;
-	margin:430px;
-}
+//.centerCircle{
+	//border:5px #70EE70 solid;
+	//height: 30px;
+	//width: 30px;
+	//background-color: #70EE70;
+	//border-radius: 50%;
+	//position:absolute;
+	//margin:435px;
+//}
 .timeStart{
-position:absolute;
-	height: 120px;
-	width: 120px;
+	position:absolute;
+	height: 180px;
+	width: 180px;
 	background-color: #F0F0F0;
 	border-radius: 50%;
-	margin:-45px 0px 0px -45px ;
+	border:0px #70EE70 solid;
+	margin:360px 0px 0px 360px ;
 	background-image: url('Image/start.png');
 	background-size: 100% 100%;
-
+	font-size:18px;
+	font-weight:bold;
+	text-align:center;
 }
 .timeStart:active {
-  background-color: #C0FeC0;
-  //box-shadow: 0 5px #666;
-  //transform: translateY(4px);
+	background-color: #C0FeC0;
 }
 .timeStart:hover {
-  background-color: #E0FeE0;
-  
+	background-color: #E0FeE0;
 }
 .btn{
 	width:230px;
@@ -96,7 +96,7 @@ position:absolute;
 	margin:20px 8px 0px 8px;
 }
 .btn:hover {
-  background-color:#E0E0E0;
+	background-color:#E0E0E0;
 }
 .breakfast{
 	background-color:#FCE070;
@@ -143,19 +143,36 @@ position:absolute;
 	border: 6px #000000 solid;
 }
 .Strbtn{
-	height:120px;
+	height:150px;
 	font-weight: bold; 
-	width:80%;
-	margin:20px 90px 0px 90px;
-	font-size:80px;
+	width:150px;
+	margin:30px 0px 0px 30px;
+	font-size:20px;
 	background-color: #88FF88;
+	background-image: url('Image/Spin.png');
+	background-size: 100% 100%;
 }
 .Strbtn:hover {
   background-color:#E0FFE0;
+  border: 6px #000000 solid;
+}
+.Pausebtn{
+	height:150px;
+	font-weight: bold; 
+	width:150px;
+	margin:30px 0px 0px 30px;
+	font-size:20px;
+	background-color: #88FF88;
+	background-image: url('Image/SpinPause.gif');
+	background-size: 100% 100%;
+}
+.Pausebtn:hover {
+	background-color:#FFE0E0;
+	border: 6px #000000 solid;
 }
 
 #result{
-	margin:150px auto -150px auto;
+	margin:60px auto -150px auto;
 	font-size:100px;
 	width:900px;
 	height: 120px;
@@ -163,36 +180,41 @@ position:absolute;
 	text-align:center;
 }
 .slider {
-  -webkit-appearance: none;
-  width: 100%;
-  height: 55px;
-  background: #d3d3d3;
-  outline: none;
-  opacity: 0.7;
-  -webkit-transition: .2s;
-  transition: opacity .2s;
-  align:center;
-  margin:70px 0px -70px 0px;
+	-webkit-appearance: none;
+	width: 700px;
+	height: 60px;
+	background: #d3d3d3;
+	outline: none;
+	opacity: 0.7;
+	-webkit-transition: .2s;
+	transition: opacity .2s;
+	align:center;
+	margin:70px 0px 0px 40px;
+	position:absolute;
+	background-image: url('Image/Sliderbar.png');
+	background-size: 100% 100%;
 }
 
 .slider:hover {
-  opacity: 1;
+	opacity: 1;
 }
 
 .slider::-webkit-slider-thumb {//button
-  -webkit-appearance: none;
-  appearance: none;
-  width: 80px;
-  height: 80px;
-  background: #04CC04;
-  cursor: pointer;
+	-webkit-appearance: none;
+	appearance: none;
+	width: 120px;
+	height: 120px;
+	//background: #04CC04;
+	cursor: pointer;
+	background-image: url('Image/slider.png');
+	background-size: 100% 100%;
 }
 
 .slider::-moz-range-thumb {
-  width: 80px;
-  height: 80px;
-  background: #04AA6D;
-  cursor: pointer;
+	width: 80px;
+	height: 80px;
+	background: #04AA6D;
+	cursor: pointer;
 }
 </style></head>
 <body>
@@ -214,13 +236,17 @@ async function rotat(name) {
     Spinning = true;
 	const btnText = document.getElementById("mainBtn");
 	btnText.textContent = "Pause";
-	btnText.style.backgroundColor = "#FF8888"
+	//btnText.style.backgroundColor = "#FF8888"
+	btnText.classList.add('Pausebtn');
+	btnText.classList.remove('Strbtn');
   }
   else{
 	Spinning = false;
 	const btnText = document.getElementById("mainBtn");
-	btnText.textContent = "Start";
-	btnText.style.backgroundColor = "#88FF88"
+	btnText.textContent = "SPIN";
+	//btnText.style.backgroundColor = "#88FF88"
+	btnText.classList.add('Strbtn');
+	btnText.classList.remove('Pausebtn');
   }
   const rectangle = document.getElementsByClassName(name) 
   angle = 360/rectangle.length
@@ -234,7 +260,7 @@ async function rotat(name) {
 		which = ((deg-90)/angle+1)%rectangle.length;
 		document.getElementById("result").textContent = reverse_list[Math.floor(which)];
 	  	await delay(0.001);
-		console.log(SpinSpeed)
+		//console.log(SpinSpeed)
   }
   
 }
@@ -353,7 +379,7 @@ readList('breakfast');
 <div class="lineBox"><div class="line"><div class="Choice_text">初始</div></div></div>
 
 </div>
-<div class="centerCircle"><button class="timeStart" onclick="countDown()"></button></div>
+<button class="timeStart" onclick="countDown()">Random</button>
 <div class="triangle-down "></div>
 
 </div>
