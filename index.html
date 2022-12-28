@@ -234,14 +234,13 @@ function delay(n){
         setTimeout(resolve,n*1000);
     });
 }
-async function rotat(name) {
+async function rotat() {
 
 	const angles = [];
   if (Spinning == false){
     Spinning = true;
 	const btnText = document.getElementById("mainBtn");
 	btnText.textContent = "Pause";
-	//btnText.style.backgroundColor = "#FF8888"
 	btnText.classList.add('Pausebtn');
 	btnText.classList.remove('Strbtn');
   }
@@ -249,54 +248,54 @@ async function rotat(name) {
 	Spinning = false;
 	const btnText = document.getElementById("mainBtn");
 	btnText.textContent = "SPIN";
-	//btnText.style.backgroundColor = "#88FF88"
 	btnText.classList.add('Strbtn');
 	btnText.classList.remove('Pausebtn');
   }
-  const rectangle = document.getElementsByClassName(name) 
+  const rectangle = document.getElementsByClassName('lineBox') 
   angle = 360/rectangle.length
   while(Spinning){
+  if(Spinning==false){
+  break;}
     count++; 
 	  for(var j=0;j<rectangle.length;j++){
 		var SpinSpeed = document.getElementById("Speed").value/100+1;
 		var deg = (SpinSpeed*count +(angle*j))+90;
 		rectangle[j].style.transform = "rotate(" + deg + "deg)";
-	  }
+	  }if(Spinning==false){
+  break;}
 		which = ((deg-90)/angle+1)%rectangle.length;
 		document.getElementById("result").textContent = reverse_list[Math.floor(which)];
 	  	await delay(0.001);
-		//console.log(SpinSpeed)
   }
   
 }
 async function countDown() {
-
-	const angles = [];
-  if (Spinning == false){
+	if (Spinning == true){
+	rotat();
+	}
+	
+	if (Spinning == false){
     Spinning = true;
 	var SpinBar = document.getElementById("Speed").value/50+1;
 	var startUp_speed = (1 + Math.random() * 8)+SpinBar;
 	console.log(SpinBar)
 	console.log(startUp_speed)
 	SpinSpeed = startUp_speed;
+	count = 0;
   }
-  count = 0;
+  const angles = [];
+  
   const rectangle = document.getElementsByClassName('lineBox');
   var angle = 360/rectangle.length;
   while(Spinning){
     count++;
 	for(var j=0;j<rectangle.length;j++){
 		var deg = (SpinSpeed*count +(angle*j))+90;
-		//if (deg>360){deg=deg%360;}
 		rectangle[j].style.transform = "rotate(" + deg + "deg)";
 	}
 	which = ((deg-90)/angle+1)%rectangle.length;
 	document.getElementById("result").textContent = reverse_list[Math.floor(which)];
 	SpinSpeed=SpinSpeed-0.01;
-	//console.log(SpinSpeed)
-	//console.log(count)
-	//console.log(angle)
-	//console.log(deg)
 	if (SpinSpeed<startUp_speed/2){
 		Spinning = false;
 		break;
@@ -364,7 +363,10 @@ function add_Line(number){
 		document.getElementById("empty").appendChild(lineBox);
 	}
 }
+function Change_link(){
+ document.getElementById("test").href="https://goo.gl/maps/RYprN3xYU4AASEzU6"; 
 
+}
 
 readList('breakfast');
 </script>
@@ -377,7 +379,7 @@ readList('breakfast');
 <button class="btn dinner" onclick="readList('dinner');">Dinner</button>
 <button class="btn drink" onclick="readList('drink');">Drink</button>
 
-<button id="mainBtn" class="Strbtn" onclick="rotat('lineBox');">SPIN</button>
+<button id="mainBtn" class="Strbtn" onclick="rotat();">SPIN</button>
 <input type="range" min="-99" max="200" value="0" class="slider" id="Speed">
 
 <div id="result"></div>
@@ -392,5 +394,7 @@ readList('breakfast');
 
 </div>
 <div>version 3.2</div>
+<button class="" onclick="Change_link();">test</button>
+<a id="test" href="https://goo.gl/maps/tQiodHcfDgEvFDZw5">test</a>
 </body>
-</html>
+</html> 
