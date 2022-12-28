@@ -226,8 +226,10 @@ body {
 	height: 200px;
 	width: 200px;
 	background-size: 100% 100%;
-	margin:0px 0px 0px 850px;
+	margin:-5 px 0px 0px 850px;
 	//position:absolute;
+	background-color:rgba(0, 0, 0, 0);
+	border: 0px #000000 solid;
 }
 .linkbtn:hover {
 	border: 6px #000000 solid;
@@ -377,7 +379,7 @@ async function Change_link(){
 }
 var shop,link;
 function readLink(){
-fetch('Link.txt')
+fetch('Link')
 	.then(function(response) {return response.text()})
 	.then(function(html) {
 		list = html;
