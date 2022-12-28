@@ -186,7 +186,7 @@ body {
 }
 .slider {
 	-webkit-appearance: none;
-	width: 900px;
+	width: 800px;
 	height: 100px;
 	background: #d3d3d3;
 	outline: none;
@@ -194,7 +194,7 @@ body {
 	-webkit-transition: .2s;
 	transition: opacity .2s;
 	align:center;
-	margin:80px 0px 0px 70px;
+	margin:80px 0px 0px 30px;
 	position:absolute;
 	background-image: url('Image/Sliderbar.png');
 	background-size: 100% 100%;
@@ -220,6 +220,17 @@ body {
 	height: 80px;
 	background: #04AA6D;
 	cursor: pointer;
+}
+.linkbtn{
+	background-image: url('Image/maps.png');
+	height: 200px;
+	width: 200px;
+	background-size: 100% 100%;
+	margin:0px 0px 0px 850px;
+	//position:absolute;
+}
+.linkbtn:hover {
+	border: 6px #000000 solid;
 }
 </style></head>
 <body>
@@ -278,8 +289,8 @@ async function countDown() {
     Spinning = true;
 	var SpinBar = document.getElementById("Speed").value/50+1;
 	var startUp_speed = (1 + Math.random() * 8)+SpinBar;
-	console.log(SpinBar)
-	console.log(startUp_speed)
+	//console.log(SpinBar)
+	//console.log(startUp_speed)
 	SpinSpeed = startUp_speed;
 	count = 0;
   }
@@ -319,15 +330,7 @@ fetch(filename)
 		
 		delete_Line();
 		add_Line(Object.keys(list).length);
-		//var btn_border = document.getElementsByClassName("btn");
-		//for(var i=0;i<btn_border.text;i++){
-			
-			//btn_border[i].style.border = "0px solid #000000";
-		//}
-		
-		//btn_border = document.getElementsByClassName(filename);
-		//btn_border[0].style.border = "6px solid #000000";
-		
+
 		const Choice_text = document.getElementsByClassName('Choice_text');
 		const rectangle = document.getElementsByClassName('lineBox');
 		angle = 360/rectangle.length;
@@ -346,9 +349,7 @@ function delete_Line(){
 	while(LineBox.length > 0){
         LineBox[0].parentNode.removeChild(LineBox[0]);
     }
-
 }
-
 
 function add_Line(number){
 	for(var i=0;i<number;i++){
@@ -363,11 +364,40 @@ function add_Line(number){
 		document.getElementById("empty").appendChild(lineBox);
 	}
 }
-function Change_link(){
- document.getElementById("test").href="https://goo.gl/maps/RYprN3xYU4AASEzU6"; 
-
+async function Change_link(){
+	await delay(0.1);
+	const Chosen = document.getElementById('result').textContent;
+	for(var i=0;i<shop.length;i++){
+			if(shop[i]==Chosen){
+				thisLink=link[i];
+			}
+		}
+	console.log(Chosen)
+	window.open(thisLink);
 }
-
+var shop,link;
+function readLink(){
+fetch('Link.txt')
+	.then(function(response) {return response.text()})
+	.then(function(html) {
+		list = html;
+		//list = list.split("\r\n");
+		list = list.split(/\r\n| https/);
+		list = list.filter(n => n)
+		
+		shop = new Array(list.length/2);
+		link = new Array(list.length/2);
+		var count_var = 0;
+		for(var i=0;i<list.length;i+=2){
+			link[count_var]='https'+list[i+1];
+			shop[count_var]=list[i];
+			count_var++;
+		}
+	})
+	.catch(function(err) {  
+		console.log('Failed to fetch page: ', err);  
+	});
+}
 readList('breakfast');
 </script>
 
@@ -381,6 +411,7 @@ readList('breakfast');
 
 <button id="mainBtn" class="Strbtn" onclick="rotat();">SPIN</button>
 <input type="range" min="-99" max="200" value="0" class="slider" id="Speed">
+<button class="linkbtn" onclick="readLink();Change_link();">test</button>
 
 <div id="result"></div>
 
@@ -393,8 +424,7 @@ readList('breakfast');
 <div class="triangle-down "></div>
 
 </div>
-<div>version 3.2</div>
-<button class="" onclick="Change_link();">test</button>
-<a id="test" href="https://goo.gl/maps/tQiodHcfDgEvFDZw5">test</a>
+<div>version 3.3</div>
+
 </body>
 </html> 
