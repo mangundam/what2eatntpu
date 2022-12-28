@@ -328,11 +328,12 @@ fetch(filename)
 		list = html;
 		//list = list.split("\n");
 		//list = list.filter(n => n)
-		console.log(list);
-		list = list.split(/\r\n| https/);
-		list = list.filter(n => n)
 		
-		console.log(list.length);
+		console.log(list);
+		list = list.split(/\n| https/);
+		console.log(list)
+		list = list.filter(n => n);
+		console.log(list)
 		shop = new Array(list.length/2);
 		link = new Array(list.length/2);
 		
@@ -342,18 +343,19 @@ fetch(filename)
 			shop[count_var]=list[i];
 			count_var++;
 		}
+		list = shop;
 		console.log(shop);
-		reverse_list = shop;
+		reverse_list = Array.from(list);
 		reverse_list = reverse_list.reverse();
 		
 		delete_Line();
-		add_Line(Object.keys(shop).length);
+		add_Line(Object.keys(list).length);
 
 		const Choice_text = document.getElementsByClassName('Choice_text');
 		const rectangle = document.getElementsByClassName('lineBox');
 		angle = 360/rectangle.length;
 		for(var j=0;j<Choice_text.length;j++){
-				Choice_text[j].textContent = shop[j];
+				Choice_text[j].textContent = list[j];
 				ini_angle = (angle*j)+90
 				rectangle[j].style.transform = "rotate(" + ini_angle + "deg)";
 			  }
@@ -393,7 +395,7 @@ async function Change_link(){
 	console.log(Chosen)
 	window.open(thisLink);
 }
-/*
+
 function readLink(){
 fetch('Link')
 	.then(function(response) {return response.text()})
@@ -415,7 +417,7 @@ fetch('Link')
 	.catch(function(err) {  
 		console.log('Failed to fetch page: ', err);  
 	});
-}*/
+}
 readList('breakfast');
 </script>
 
@@ -429,7 +431,7 @@ readList('breakfast');
 
 <button id="mainBtn" class="Strbtn" onclick="rotat();">SPIN</button>
 <input type="range" min="-99" max="200" value="0" class="slider" id="Speed">
-<button class="linkbtn" onclick="Change_link();"></button>
+<button class="linkbtn" onclick="readLink();Change_link();"></button>
 
 <div id="result"></div>
 
@@ -442,7 +444,7 @@ readList('breakfast');
 <div class="triangle-down "></div>
 
 </div>
-<div>version 3.5</div>
+<div>version 3.6</div>
 
 </body>
 </html> 
