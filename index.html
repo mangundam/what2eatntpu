@@ -242,6 +242,7 @@ var Spinning = false;
 var SpinSpeed = 1;
 var list;
 var reverse_list;
+var shop,link;
 function delay(n){
     return new Promise(function(resolve){
         setTimeout(resolve,n*1000);
@@ -325,9 +326,24 @@ fetch(filename)
     .then(function(response) {return response.text()})
     .then(function(html) {
 		list = html;
-		list = list.split("\n");
+		//list = list.split("\n");
+		//list = list.filter(n => n)
+		console.log(list);
+		list = list.split(/\r\n| https/);
 		list = list.filter(n => n)
-		reverse_list = Array.from(list);
+		
+		console.log(list.length);
+		shop = new Array(list.length/2);
+		link = new Array(list.length/2);
+		
+		var count_var = 0;
+		for(var i=0;i<list.length;i+=2){
+			link[count_var]='https'+list[i+1];
+			shop[count_var]=list[i];
+			count_var++;
+		}
+		
+		reverse_list = shop;
 		reverse_list = reverse_list.reverse();
 		
 		delete_Line();
@@ -377,7 +393,7 @@ async function Change_link(){
 	console.log(Chosen)
 	window.open(thisLink);
 }
-var shop,link;
+/*
 function readLink(){
 fetch('Link')
 	.then(function(response) {return response.text()})
@@ -399,7 +415,7 @@ fetch('Link')
 	.catch(function(err) {  
 		console.log('Failed to fetch page: ', err);  
 	});
-}
+}*/
 readList('breakfast');
 </script>
 
@@ -413,7 +429,7 @@ readList('breakfast');
 
 <button id="mainBtn" class="Strbtn" onclick="rotat();">SPIN</button>
 <input type="range" min="-99" max="200" value="0" class="slider" id="Speed">
-<button class="linkbtn" onclick="readLink();Change_link();"></button>
+<button class="linkbtn" onclick="Change_link();"></button>
 
 <div id="result"></div>
 
