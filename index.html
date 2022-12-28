@@ -330,7 +330,7 @@ fetch(filename)
 		//list = list.filter(n => n)
 		
 		console.log(list);
-		list = list.split(/\n| https/);
+		list = list.split(/\r|\n| https/);
 		console.log(list)
 		list = list.filter(n => n);
 		console.log(list)
@@ -444,7 +444,7 @@ readList('breakfast');
 <div class="triangle-down "></div>
 
 </div>
-<div>version 3.8</div>
+<div>version 3.9</div>
 
 </body>
 </html> 
