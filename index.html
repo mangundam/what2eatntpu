@@ -342,18 +342,18 @@ fetch(filename)
 			shop[count_var]=list[i];
 			count_var++;
 		}
-		
+		console.log(shop);
 		reverse_list = shop;
 		reverse_list = reverse_list.reverse();
 		
 		delete_Line();
-		add_Line(Object.keys(list).length);
+		add_Line(Object.keys(shop).length);
 
 		const Choice_text = document.getElementsByClassName('Choice_text');
 		const rectangle = document.getElementsByClassName('lineBox');
 		angle = 360/rectangle.length;
 		for(var j=0;j<Choice_text.length;j++){
-				Choice_text[j].textContent = list[j];
+				Choice_text[j].textContent = shop[j];
 				ini_angle = (angle*j)+90
 				rectangle[j].style.transform = "rotate(" + ini_angle + "deg)";
 			  }
