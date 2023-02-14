@@ -1,6 +1,7 @@
 # what2eat_ntpu
 ### 網頁版轉盤
 ![qrcode_mangundam github io](https://user-images.githubusercontent.com/31913840/208034825-c1318f4e-ccaa-458e-8bbd-4ed94d3e0a55.png)
+[Android](what2eat.apk)
 
 ### 加入LINE官方帳號
 ![547zuysk](https://user-images.githubusercontent.com/31913840/137063548-bbb68145-aaa4-4886-be3e-edbf402804a5.png)
